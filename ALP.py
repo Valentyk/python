@@ -10,7 +10,7 @@ phi_sym, theta_sym = sp.symbols('phi theta')
 
 # Define a general function of phi and theta
 # For example, let's use f(phi, theta) = sin(phi) * cos(theta)
-function_expr = alp(2,0,theta_sym)
+function_expr = phi_sym
 N = 100
 
 print(function_expr)   

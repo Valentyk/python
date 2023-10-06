@@ -4,14 +4,17 @@ from sympy import assoc_legendre as alp
 import sympy as sp
 
 def plot(function, phi_sym, theta_sym, N):
-    phi_values = np.linspace(-np.pi, np.pi, N)  # Adjust the number of points as needed
-    theta_values = np.linspace(-np.pi/2, np.pi/2, int(N/2))  # Adjust the number of points as needed
+
+    #spherical coordinates where phi (0,pi) is angle between x and y axis in their respective plane and theta (0,2pi) is the angle between y and z axis in their respektive plane 
+
+    phi_values = np.linspace(0, np.pi, int(N/2))  # Adjust the number of points as needed
+    theta_values = np.linspace(0, 2*np.pi, int(N))  # Adjust the number of points as needed
     phi_mesh, theta_mesh = np.meshgrid(phi_values, theta_values)
 
     x = np.cos(phi_mesh)
     y = np.sin(phi_mesh)*np.cos(theta_mesh)
     z = np.sin(phi_mesh)*np.sin(theta_mesh)
-
+    
     # Convert the symbolic function to a callable Python function
     function_lambda = sp.lambdify((phi_sym, theta_sym), function, 'numpy')
 
@@ -33,9 +36,9 @@ def plot(function, phi_sym, theta_sym, N):
 if __name__ == "__main__":
 
     phi_sym, theta_sym = sp.symbols('phi theta')
-    function_expr = alp(2,0,theta_sym)
+    function_expr = theta_sym
     N = 50
 
     print(function_expr)   
 
-    plot(function_expr, phi_sym, theta_sym)
+    plot(function_expr, phi_sym, theta_sym, N)
